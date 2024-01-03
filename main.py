@@ -1,7 +1,10 @@
 import pyautogui
 import time, json
 from flask import Flask, request, make_response, Response
-
+from threading import Thread, Lock
+pyautogui.PAUSE = 0.01
+pyautogui.FAILSAFE = False
+mutex = Lock()
 # def move_mouse(x, y):
 #     pyautogui.moveTo(x, y)
 
@@ -25,14 +28,18 @@ app = Flask(__name__)
 @app.route('/moveMouse', methods=['POST'])
 def moveMouse():
     body = request.get_data()
+    # print(body)
     body_json = json.loads(body)
-    x = body_json['x']
-    y = body_json['y']
-    is_drag = body_json['is_drag']
-    if is_drag:
-        pyautogui.dragTo(x, y, button="left")
-    else:
-        pyautogui.moveTo(x, y)
+    with mutex:
+        for value in body_json:
+            x = value['x']
+            y = value['y']
+            is_drag = value['is_drag']
+            if is_drag:
+                # print(x)
+                pyautogui.dragTo(x, y, button="left")
+            else:
+                pyautogui.moveTo(x, y)
 
     return make_response(body_json, 200)
 
