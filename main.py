@@ -41,7 +41,7 @@ def moveMouse():
             else:
                 pyautogui.moveTo(x, y)
 
-    return make_response(body_json, 200)
+    return make_response("ok", 200)
 
 if __name__ == '__main__':
     app.debug = True
