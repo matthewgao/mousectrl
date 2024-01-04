@@ -1,6 +1,6 @@
 import pyautogui
 import time, json
-pyautogui.PAUSE = 0.01
+pyautogui.PAUSE = 0.0001
 pyautogui.FAILSAFE = False
 
 import socket
@@ -23,7 +23,7 @@ def handle_client(client_socket, client_address):
                 print(f"Client {client_address} disconnected.")
                 break
             received_int = struct.unpack('>I', data)[0]
-            print(f"Received integer from {client_address}: {received_int}")
+            # print(f"Received integer from {client_address}: {received_int}")
             if has_x == False:
                 x = received_int
                 has_x = True
