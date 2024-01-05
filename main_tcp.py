@@ -1,7 +1,10 @@
 import pyautogui
 import time, json
-pyautogui.PAUSE = 0.0001
-pyautogui.FAILSAFE = False
+pyautogui.PAUSE = 0.0
+# pyautogui.FAILSAFE = False
+pyautogui.MINIMUM_DURATION = 0.0
+pyautogui.MINIMUM_SLEEP = 0.0
+pyautogui.DARWIN_CATCH_UP_TIME = 0.0
 
 import socket
 import struct
